@@ -9,6 +9,7 @@ const margin = {
   left: 100
 };
 
+
 const width = svgWidth - margin.left - margin.right;
 const height = svgHeight - margin.top - margin.bottom;
 
@@ -20,18 +21,12 @@ const svg = d3
   .attr("width", svgWidth)
   .attr("height", svgHeight);
 
-
-
 // Append an SVG group
 const chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-
-
 // Initial Params
 let chosenXAxis = "poverty";
-
-
 
 // function used for updating x-scale const upon click on axis label
 function xScale(newsData, chosenXAxis) {
@@ -43,7 +38,6 @@ function xScale(newsData, chosenXAxis) {
     .range([0, width]);
 
   return xLinearScale;
-
 }
 
 // function used for updating xAxis const upon click on axis label
@@ -56,7 +50,6 @@ function renderAxes(newXScale, xAxis) {
 
   return xAxis;
 }
-
 
 // function used for updating circles group with a transition to
 // new circles
@@ -190,8 +183,6 @@ function updateToolTip(chosenXAxis, circlesGroup) {
       .classed("inactive", true)
       .text("Income");
 
-
-
     // y axis text
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
@@ -200,11 +191,9 @@ function updateToolTip(chosenXAxis, circlesGroup) {
       .attr("dy", "1em")
       .classed("aText", true)
       .text("Obesity Rate (%)");
-
-    
+   
       // updateToolTip function above csv import
     circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
-
 
    // x axis labels event listener
    labelsGroup.selectAll("text")
@@ -216,8 +205,6 @@ function updateToolTip(chosenXAxis, circlesGroup) {
        // replaces chosenXAxis with value
        chosenXAxis = value;
 
-      //  console.log(chosenXAxis)
-
        // functions here found above csv import
        // updates x scale for new data
        xLinearScale = xScale(newsData, chosenXAxis);
@@ -227,7 +214,6 @@ function updateToolTip(chosenXAxis, circlesGroup) {
 
        // updates circles with new x values
        circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis);
-
 
       // update lables with new x values
       circlesText = renderXLabels(circlesText, xLinearScale, chosenXAxis)
